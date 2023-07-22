@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
-//create your first component
 const Square = () => {
+  // 0 = empty
+  // 1 = part of a ship
+  // 2 = a sunken part of a ship
+  // 3 = a missed shot
   const [block, setBlock] = useState([
     [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -15,7 +18,7 @@ const Square = () => {
     [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
   ]);
 
-  const handleClick = (rowIndex, columnIndex) => {
+  const fireTorpedo = (rowIndex, columnIndex) => {
     const clickedvalue = block[rowIndex][columnIndex];
     if (clickedvalue === 1) {
       const newBlock = block.map((row, i) =>
@@ -40,7 +43,7 @@ const Square = () => {
                 value === 1 || value === 0 ? "" : value === 3 ? "gray" : "red"
               }`}
               key={j}
-              onClick={() => handleClick(i, j)}
+              onClick={() => fireTorpedo(i, j)}
             ></div>
           ))}
         </div>
