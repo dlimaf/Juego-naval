@@ -16,9 +16,15 @@ const Square = () => {
   ]);
 
   const handleClick = (rowIndex, columnIndex) => {
-    if (block[rowIndex][columnIndex] === 1) {
+    const clickedvalue = block[rowIndex][columnIndex];
+    if (clickedvalue === 1) {
       const newBlock = block.map((row, i) =>
         row.map((value, j) => (i === rowIndex && j === columnIndex ? 2 : value))
+      );
+      setBlock(newBlock);
+    } else if (clickedvalue === 0) {
+      const newBlock = block.map((row, i) =>
+        row.map((value, j) => (i === rowIndex && j === columnIndex ? 3 : value))
       );
       setBlock(newBlock);
     }
@@ -30,7 +36,9 @@ const Square = () => {
         <div className="row" key={i}>
           {row.map((value, j) => (
             <div
-              className={`square ${value === 1 || value === 0 ? "" : "red"}`}
+              className={`square ${
+                value === 1 || value === 0 ? "" : value === 3 ? "gray" : "red"
+              }`}
               key={j}
               onClick={() => handleClick(i, j)}
             ></div>
